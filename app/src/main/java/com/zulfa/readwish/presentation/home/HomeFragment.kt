@@ -1,4 +1,4 @@
-package com.zulfa.readwish.ui.home
+package com.zulfa.readwish.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

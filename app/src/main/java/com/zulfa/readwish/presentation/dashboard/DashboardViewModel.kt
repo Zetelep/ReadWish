@@ -1,4 +1,4 @@
-package com.zulfa.readwish.ui.dashboard
+package com.zulfa.readwish.presentation.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

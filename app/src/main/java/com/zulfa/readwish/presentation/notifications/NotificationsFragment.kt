@@ -1,4 +1,4 @@
-package com.zulfa.readwish.ui.notifications
+package com.zulfa.readwish.presentation.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater
