@@ -14,6 +14,13 @@ interface BookDao {
     @Query("SELECT * FROM book")
     fun getAllBook(): Flow<List<BookEntity>>
 
+    @Query("""
+    SELECT * FROM book 
+    WHERE subject LIKE '%' || :type || '%' 
+       OR bookshelves LIKE '%' || :type || '%'
+""")
+    fun getBooksByTypes(type: String): Flow<List<BookEntity>>
+
     @Query("SELECT * FROM book WHERE isFavorite = 1")
     fun getFavoriteBook(): Flow<List<BookEntity>>
 

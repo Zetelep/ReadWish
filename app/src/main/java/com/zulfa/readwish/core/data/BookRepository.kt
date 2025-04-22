@@ -41,21 +41,24 @@ class BookRepository(
 
         }.asFlow()
 
-    override fun getAllBookByTypes(topic: String): Flow<Resource<List<Book>>> = flow {
-        emit(Resource.Loading())
-        when (val response = remoteDataSource.getAllBookByTopic(topic).first()) {
-            is ApiResponse.Success -> {
-                val data = DataMapper.mapResponsesToDomain(response.data)
-                emit(Resource.Success(data))
+    override fun getAllBookByTypes(topic: String): Flow<Resource<List<Book>>> =
+        object : NetworkBoundResource<List<Book>,List<BookItem>>(){
+            override fun loadFromDB(): Flow<List<Book>> {
+                return localDataSource.getBooksByTypes(topic).map {
+                    DataMapper.mapEntitiesToDomain(it)
+                }
             }
-            is ApiResponse.Empty -> {
-                emit(Resource.Success(emptyList()))
+
+            override suspend fun createCall(): Flow<ApiResponse<List<BookItem>>>  =
+                remoteDataSource.getAllBookByTopic(topic)
+
+
+            override suspend fun saveCallResult(data: List<BookItem>) {
+                val bookList = DataMapper.mapResponsesToEntities(data)
+                localDataSource.insertBook(bookList)
             }
-            is ApiResponse.Error -> {
-                emit(Resource.Error(response.errorMessage))
-            }
-        }
-    }.flowOn(Dispatchers.IO)
+            override fun shouldFetch(data: List<Book>?): Boolean = data.isNullOrEmpty()
+        }.asFlow()
 
 
     override fun searchBooks(query: String): Flow<Resource<List<Book>>> = flow {

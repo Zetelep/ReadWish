@@ -12,6 +12,8 @@ class LocalDataSource(private val bookDao: BookDao)  {
 
     fun getFavoriteBook(): Flow<List<BookEntity>> = bookDao.getFavoriteBook()
 
+    fun getBooksByTypes(type: String): Flow<List<BookEntity>> = bookDao.getBooksByTypes(type)
+
     suspend fun insertBook(bookList: List<BookEntity>) = bookDao.insertBook(bookList)
 
     fun setFavoriteBook(book: BookEntity, newState: Boolean){
