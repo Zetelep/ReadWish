@@ -7,4 +7,34 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Light Theme Colors -->
+    <color name="colorPrimary">#5D534A</color> <!-- Warm earthy tone -->
+    <color name="colorPrimaryVariant">#3E3B36</color> <!-- Darker variant -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- White text on primary -->
+
+    <color name="colorSecondary">#F4A261</color> <!-- Warm orange -->
+    <color name="colorSecondaryVariant">#E76F51</color> <!-- Richer orange -->
+    <color name="colorOnSecondary">#000000</color> <!-- Black text on secondary -->
+
+    <color name="colorBackground">#FFFFFF</color> <!-- Standard white background -->
+    <color name="colorSurface">#FAFAFA</color> <!-- Light surface for cards -->
+    <color name="colorOnSurface">#000000</color> <!-- Black text on surface -->
+
+
+    <!-- Dark Theme Colors -->
+    <color name="DTColorPrimary">#2E2B28</color> <!-- Very dark brownish-gray -->
+    <color name="DTColorPrimaryVariant">#1C1B1A</color> <!-- Even darker -->
+
+    <color name="DTColorOnPrimary">#FFFFFF</color> <!-- White text/icons -->
+
+    <color name="DTColorSecondary">#D08C60</color> <!-- Muted warm tone -->
+    <color name="DTColorSecondaryVariant">#B86F4A</color> <!-- Slightly darker warm tone -->
+    <color name="DTColorOnSecondary">#FFFFFF</color> <!-- White for contrast -->
+
+    <color name="DTColorBackground">#121212</color> <!-- Standard dark background -->
+    <color name="DTColorSurface">#1E1E1E</color> <!-- Slightly lighter surface -->
+    <color name="DTColorOnSurface">#E0E0E0</color> <!-- Light grey text on dark -->
+
+
 </resources>
