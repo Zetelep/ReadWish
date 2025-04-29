@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:colorBackground"
-        android:padding="16dp">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/categoriesTitle"
@@ -46,7 +46,8 @@
                     android:layout_height="wrap_content"
                     android:text="All"
                     android:checked="true"
-                    app:chipBackgroundColor="?attr/colorSecondary"
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    app:chipStrokeColor="@color/colorOnSurface"
                     android:textColor="?attr/colorOnSecondary"
                     />
 
@@ -55,7 +56,8 @@
                     style="@style/Widget.Material3.Chip.Filter.Elevated"                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fiction"
-                    app:chipBackgroundColor="?attr/colorSecondary"
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    app:chipStrokeColor="@color/colorOnSurface"
                     android:textColor="?attr/colorOnSecondary"/>
 
                 <com.google.android.material.chip.Chip
@@ -63,24 +65,29 @@
                     android:layout_height="wrap_content"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
                     android:text="Science Fiction &amp; Fantasy"
-                    app:chipBackgroundColor="?attr/colorSecondary"
-                    android:textColor="?attr/colorOnSecondary"/>
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:chipStrokeColor="@color/colorOnSurface"
+                    />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Children’s Books"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
-                    app:chipBackgroundColor="?attr/colorSecondary"
-                    android:textColor="?attr/colorOnSecondary"/>
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:chipStrokeColor="@color/colorOnSurface"
+                    />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="History"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
-                    app:chipBackgroundColor="?attr/colorSecondary"
+                    app:chipBackgroundColor="@color/chip_background_color"
                     android:textColor="?attr/colorOnSecondary"
+                    app:chipStrokeColor="@color/colorOnSurface"
                     />
 
                 <com.google.android.material.chip.Chip
@@ -88,24 +95,30 @@
                     android:layout_height="wrap_content"
                     android:text="Science"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
-                    app:chipBackgroundColor="?attr/colorSecondary"
-                    android:textColor="?attr/colorOnSecondary"/>
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:chipStrokeColor="@color/colorOnSurface"
+                    />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Biography"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
-                    app:chipBackgroundColor="?attr/colorSecondary"
-                    android:textColor="?attr/colorOnSecondary"/>
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:chipStrokeColor="@color/colorOnSurface"
+                    />
 
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Philosophy"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
-                    app:chipBackgroundColor="?attr/colorSecondary"
-                    android:textColor="?attr/colorOnSecondary"/>
+                    app:chipBackgroundColor="@color/chip_background_color"
+                    android:textColor="?attr/colorOnSecondary"
+                    app:chipStrokeColor="@color/colorOnSurface"
+                    />
 
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
@@ -139,7 +152,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textColor="?attr/colorPrimary"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
             android:overScrollMode="never"

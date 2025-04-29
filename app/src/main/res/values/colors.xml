@@ -12,7 +12,7 @@
     <color name="colorPrimary">#5D534A</color> <!-- Warm earthy tone -->
     <color name="colorPrimaryVariant">#3E3B36</color> <!-- Darker variant -->
     <color name="colorOnPrimary">#FFFFFF</color> <!-- White text on primary -->
-
+    <color name="bottomAppBarColor">#F4A261</color>
     <color name="colorSecondary">#F4A261</color> <!-- Warm orange -->
     <color name="colorSecondaryVariant">#E76F51</color> <!-- Richer orange -->
     <color name="colorOnSecondary">#000000</color> <!-- Black text on secondary -->
@@ -20,6 +20,7 @@
     <color name="colorBackground">#FFFFFF</color> <!-- Standard white background -->
     <color name="colorSurface">#FAFAFA</color> <!-- Light surface for cards -->
     <color name="colorOnSurface">#000000</color> <!-- Black text on surface -->
+    <color name="colorOnSurfaceVariant">#000000</color>
 
 
     <!-- Dark Theme Colors -->

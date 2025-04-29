@@ -1,22 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.ReadWish" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color -->
-        <item name="colorPrimary">@color/DTColorPrimary</item>
-        <item name="colorPrimaryVariant">@color/DTColorPrimaryVariant</item>
-        <item name="colorOnPrimary">@color/DTColorOnPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
 
         <!-- Secondary brand color -->
-        <item name="colorSecondary">@color/DTColorSecondary</item>
-        <item name="colorSecondaryVariant">@color/DTColorSecondaryVariant</item>
-        <item name="colorOnSecondary">@color/DTColorOnSecondary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
 
         <!-- Backgrounds and surfaces -->
-        <item name="android:colorBackground">@color/DTColorBackground</item>
-        <item name="colorSurface">@color/DTColorSurface</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorSurface">@color/colorSurface</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
 
         <!-- Status bar and navigation bar -->
-        <item name="android:statusBarColor">@color/DTColorPrimaryVariant</item>
-        <item name="android:navigationBarColor">@color/DTColorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryVariant</item>
     </style>
 </resources>
