@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.search.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchFieldContainer"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Search"
+        app:boxStrokeColor = "@color/colorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance = "@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+        app:startIconDrawable="@drawable/baseline_search_24"
+        >
 
-</FrameLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/searchField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:checkedButton="@+id/bt_by_author_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchFieldContainer">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_by_author_title"
+            style="@style/ToggleButtonOrangeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By Author &amp; Title"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bt_by_topic"
+            style="@style/ToggleButtonOrangeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="By Topic" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFavoriteBooks"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:paddingTop="20dp"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toggleButton"
+        app:spanCount="2"
+        tools:listitem="@layout/book_item" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

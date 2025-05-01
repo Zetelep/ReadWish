@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToggleButtonOrangeStyle" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="backgroundTint">@color/selector_toggle_button</item>
+        <item name="strokeColor">@color/selector_toggle_stroke</item>
+        <item name="android:textColor">@color/selector_toggle_text</item>
+    </style>
+</resources>
