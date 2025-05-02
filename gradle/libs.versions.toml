@@ -20,14 +20,8 @@ room = "2.7.0"
 retrofit = "2.11.0"
 loggingInterceptor = "4.12.0"
 kotlinxCoroutines = "1.8.1"
-lifecycle = "2.8.5"
 koin = "3.5.6"
-activity = "1.10.1"
-navigationUiKtxVersion = "2.8.9"
-navigationFragment = "2.8.9"
-activityVersion = "1.10.1"
-coreKtxVersion = "1.10.3"
-featureDeliveryKtx = "2.1.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,8 +47,6 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
-androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activityVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

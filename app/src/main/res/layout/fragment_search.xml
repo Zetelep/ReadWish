@@ -10,7 +10,7 @@
         android:id="@+id/searchFieldContainer"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Search"
+        android:hint="@string/hint_search"
         app:boxStrokeColor = "@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
             style="@style/ToggleButtonOrangeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="By Author &amp; Title"
+            android:text="@string/btn_filter_by_author_amp_title"
             />
 
         <com.google.android.material.button.MaterialButton
@@ -51,7 +51,7 @@
             style="@style/ToggleButtonOrangeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="By Topic" />
+            android:text="@string/btn_filter_by_topic" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 

@@ -15,6 +15,7 @@
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/desc_book_cover"
             android:scaleType="centerCrop"
             android:src="@drawable/sample_cover" />
 
@@ -25,7 +26,7 @@
             android:layout_gravity="bottom"
             android:background="#AA000000"
             android:padding="8dp"
-            android:text="Book Title"
+            android:text="@string/tv_book_title"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:maxLines="2"
