@@ -52,6 +52,8 @@ data class BookItem(
     @field:SerializedName("summaries")
     val summaries: List<String>,
 
+    @field:SerializedName("download_count")
+    val downloadCount: Int
     )
 
 data class AuthorsItem(

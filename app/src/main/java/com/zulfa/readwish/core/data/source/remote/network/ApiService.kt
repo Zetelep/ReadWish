@@ -10,8 +10,8 @@ interface ApiService {
     suspend fun getList(): ListBookResponse
 
     @GET("books")
-    suspend fun getListByTopic(@Query("topic") topic: String): ListBookResponse
+    suspend fun getListByTopic(@Query("topic") topic: String, @Query("sort") sort: String): ListBookResponse
 
     @GET("books")
     suspend fun search(@Query("search") query: String): ListBookResponse
-}
+    }

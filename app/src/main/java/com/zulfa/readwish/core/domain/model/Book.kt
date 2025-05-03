@@ -23,5 +23,7 @@ data class Book(
 
     val summaries: List<String>,
 
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+
+    val downloadCount: Int
 ): Parcelable

@@ -41,16 +41,16 @@ class BookRepository(
 
         }.asFlow()
 
-    override fun getAllBookByTypes(topic: String): Flow<Resource<List<Book>>> =
+    override fun getAllBookByTypes(topic: String,sort:String): Flow<Resource<List<Book>>> =
         object : NetworkBoundResource<List<Book>,List<BookItem>>(){
             override fun loadFromDB(): Flow<List<Book>> {
-                return localDataSource.getBooksByTypes(topic).map {
+                return localDataSource.getBooksByTypesSorted(topic,sort).map {
                     DataMapper.mapEntitiesToDomain(it)
                 }
             }
 
             override suspend fun createCall(): Flow<ApiResponse<List<BookItem>>>  =
-                remoteDataSource.getAllBookByTopic(topic)
+                remoteDataSource.getAllBookByTopic(topic,sort)
 
 
             override suspend fun saveCallResult(data: List<BookItem>) {
@@ -65,7 +65,7 @@ class BookRepository(
         emit(Resource.Loading())
         when (val response = remoteDataSource.search(query).first()) {
             is ApiResponse.Success -> {
-                val data = DataMapper.mapResponsesToDomain(response.data) // <- mapping to domain here!
+                val data = DataMapper.mapResponsesToDomain(response.data)
                 emit(Resource.Success(data))
             }
             is ApiResponse.Empty -> emit(Resource.Success(emptyList()))

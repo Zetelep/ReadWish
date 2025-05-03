@@ -8,7 +8,7 @@ interface IBookRepository {
 
     fun getAllBook(): Flow<Resource<List<Book>>>
 
-    fun getAllBookByTypes(topic: String): Flow<Resource<List<Book>>>
+    fun getAllBookByTypes(topic: String, sort:String): Flow<Resource<List<Book>>>
 
     fun searchBooks(query: String): Flow<Resource<List<Book>>>
 

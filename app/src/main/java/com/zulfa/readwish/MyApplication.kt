@@ -4,6 +4,8 @@ import android.app.Application
 import com.zulfa.readwish.core.di.databaseModule
 import com.zulfa.readwish.core.di.networkModule
 import com.zulfa.readwish.core.di.repositoryModule
+import com.zulfa.readwish.presentation.di.useCaseModule
+import com.zulfa.readwish.presentation.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -19,8 +21,8 @@ class MyApplication : Application() {
                     databaseModule,
                     networkModule,
                     repositoryModule,
-//                    useCaseModule, not on Di core
-//                    viewModelModule
+                    useCaseModule,
+                    viewModelModule
                 )
             )
         }

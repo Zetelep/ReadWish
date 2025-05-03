@@ -19,6 +19,7 @@ object DataMapper {
                 title = it.title,
                 authors = it.authors.joinToString(", ") { author -> author.name },
                 summaries = it.summaries.joinToString("% "){it},
+                downloadCount = it.downloadCount,
                 isFavorite = false
             )
             bookList.add(book)
@@ -39,6 +40,7 @@ object DataMapper {
                 title = it.title,
                 authors = it.authors.split(",").map { lang -> lang.trim() },
                 summaries = it.summaries.split("%").map { lang -> lang.trim() },
+                downloadCount = it.downloadCount,
                 isFavorite = it.isFavorite
             )
         }
@@ -53,6 +55,7 @@ object DataMapper {
         title = input.title,
         authors = input.authors.joinToString(","),
         summaries = input.summaries.joinToString("%"),
+        downloadCount = input.downloadCount,
         isFavorite =input.isFavorite
     )
 
@@ -68,6 +71,7 @@ object DataMapper {
                 title = it.title,
                 authors = it.authors.map { author -> author.name },
                 summaries = it.summaries,
+                downloadCount = it.downloadCount,
                 isFavorite = false
             )
         }

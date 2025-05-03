@@ -34,6 +34,9 @@ data class BookEntity(
     @ColumnInfo("summaries")
     val summaries: String,
 
+    @ColumnInfo("download_count")
+    val downloadCount: Int,
+
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
 )

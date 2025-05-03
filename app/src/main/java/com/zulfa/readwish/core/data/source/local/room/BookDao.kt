@@ -15,11 +15,16 @@ interface BookDao {
     fun getAllBook(): Flow<List<BookEntity>>
 
     @Query("""
-    SELECT * FROM book 
-    WHERE subject LIKE '%' || :type || '%' 
-       OR bookshelves LIKE '%' || :type || '%'
-""")
-    fun getBooksByTypes(type: String): Flow<List<BookEntity>>
+        SELECT * FROM book 
+        WHERE subject LIKE '%' || :type || '%' 
+           OR bookshelves LIKE '%' || :type || '%'
+        ORDER BY 
+            CASE WHEN :sort = 'ascending' THEN id END ASC,
+            CASE WHEN :sort = 'descending' THEN id END DESC,
+            CASE WHEN :sort = 'popular' THEN download_count END DESC
+    """)
+    fun getBooksByTypesSorted(type: String, sort: String): Flow<List<BookEntity>>
+
 
     @Query("SELECT * FROM book WHERE isFavorite = 1")
     fun getFavoriteBook(): Flow<List<BookEntity>>

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class BookInteractor(private val bookRepository: IBookRepository): BookUseCase {
     override fun getAllBook(): Flow<Resource<List<Book>>> = bookRepository.getAllBook()
 
-    override fun getAllBookByTypes(topic: String): Flow<Resource<List<Book>>> = bookRepository.getAllBookByTypes(topic)
+    override fun getAllBookByTypes(topic: String, sort: String): Flow<Resource<List<Book>>> = bookRepository.getAllBookByTypes(topic,sort)
 
     override fun searchBooks(query: String): Flow<Resource<List<Book>>> = bookRepository.searchBooks(query)
 
