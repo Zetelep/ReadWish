@@ -148,6 +148,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/topLoadingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/rvTopBooks"
@@ -200,6 +201,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/latestLoadingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/rvLatestBooks"
@@ -249,6 +251,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/oldestLoadingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/rvOldestBooks"
