@@ -3,11 +3,10 @@ package com.zulfa.readwish.presentation.favorite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.zulfa.readwish.core.domain.usecase.BookUseCase
 
-class FavoriteViewModel : ViewModel() {
+class FavoriteViewModel(bookUseCase: BookUseCase) : ViewModel() {
+    val favoriteBook = bookUseCase.getFavoriteBook().asLiveData()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
-    }
-    val text: LiveData<String> = _text
 }
