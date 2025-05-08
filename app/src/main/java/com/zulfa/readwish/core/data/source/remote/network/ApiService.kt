@@ -14,4 +14,10 @@ interface ApiService {
 
     @GET("books")
     suspend fun search(@Query("search") query: String): ListBookResponse
+
+    @GET("books")
+    suspend fun searchBooksByTopic(@Query("topic") query: String): ListBookResponse
     }
+
+
+

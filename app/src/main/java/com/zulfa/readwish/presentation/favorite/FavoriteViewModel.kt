@@ -8,5 +8,4 @@ import com.zulfa.readwish.core.domain.usecase.BookUseCase
 
 class FavoriteViewModel(bookUseCase: BookUseCase) : ViewModel() {
     val favoriteBook = bookUseCase.getFavoriteBook().asLiveData()
-
 }

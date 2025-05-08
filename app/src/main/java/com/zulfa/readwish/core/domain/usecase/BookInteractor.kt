@@ -12,6 +12,8 @@ class BookInteractor(private val bookRepository: IBookRepository): BookUseCase {
 
     override fun searchBooks(query: String): Flow<Resource<List<Book>>> = bookRepository.searchBooks(query)
 
+    override fun searchBooksByTopic(query: String): Flow<Resource<List<Book>>> = bookRepository.searchBooksByTopic(query)
+
     override fun getFavoriteBook(): Flow<List<Book>> = bookRepository.getFavoriteBook()
 
     override fun setFavoriteBook(book: Book, state: Boolean) = bookRepository.setFavoriteBook(book, state)

@@ -7,6 +7,7 @@ import com.zulfa.readwish.presentation.favorite.FavoriteViewModel
 import com.zulfa.readwish.presentation.home.HomeViewModel
 import com.zulfa.readwish.presentation.list.ListMoreViewModel
 import com.zulfa.readwish.presentation.read.ReadViewModel
+import com.zulfa.readwish.presentation.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -22,6 +23,7 @@ val viewModelModule = module {
         ListMoreViewModel(topic, sort, get())
     }
     viewModel{ReadViewModel(get())}
+    viewModel{SearchViewModel(get())}
 
 
 }
