@@ -61,6 +61,7 @@
                     android:textColor="?attr/colorOnSecondary"/>
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSciFi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/Widget.Material3.Chip.Filter.Elevated"
@@ -71,6 +72,7 @@
                     />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipChildren"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_children_s_books"
@@ -81,6 +83,7 @@
                     />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_history"
@@ -91,6 +94,7 @@
                     />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipScience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_science"
@@ -101,6 +105,7 @@
                     />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipBiography"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_biography"
@@ -111,6 +116,7 @@
                     />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPhilosophy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_philosophy"
@@ -158,7 +164,7 @@
             app:layout_constraintVertical_bias="0.004"
             app:indicatorColor="@color/colorSecondary"
             app:trackColor="@color/colorPrimary"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTopBooks"
@@ -210,7 +216,8 @@
             app:layout_constraintTop_toBottomOf="@id/latestBookTitle"
             app:layout_constraintVertical_bias="0.004"
             app:indicatorColor="@color/colorSecondary"
-            android:visibility="gone"/>
+            app:trackColor="@color/colorPrimary"
+            android:visibility="visible"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvLatestBooks"
@@ -261,7 +268,7 @@
             app:layout_constraintVertical_bias="0.004"
             app:indicatorColor="@color/colorSecondary"
             app:trackColor="@color/colorPrimary"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvOldestBooks"
