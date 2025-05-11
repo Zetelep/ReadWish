@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.WindowCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.zulfa.readwish.R
 import com.zulfa.readwish.core.domain.model.Book
 import com.zulfa.readwish.databinding.FragmentDetailBinding
-import com.zulfa.readwish.databinding.FragmentHomeBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
@@ -22,11 +20,6 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val detailViewModel: DetailViewModel by viewModel()
 
-    private var book: Book? = null
-
-    companion object {
-        var EXTRA_DATA = "extra_data"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,8 +56,16 @@ class DetailFragment : Fragment() {
 
     private fun bindBookData(book: Book) {
         binding.tvBookTitle.text = book.title
-        binding.tvAuthorName.text = book.authors.toString()
-        binding.textView2.text = getString(R.string.title_summary)
+        binding.tvAuthorName.text = if(book.authors.size == 1 ) {
+            book.authors.firstOrNull()
+        }else {
+            buildString {
+                append(book.authors[1])
+                append(" ")
+                append(book.authors[0])
+            }
+        }
+        binding.tvSummary.text = book.summaries.joinToString(", ")
         binding.favoriteButton.isChecked = book.isFavorite
 
         // Set book cover if using URL (use Glide or Coil)
