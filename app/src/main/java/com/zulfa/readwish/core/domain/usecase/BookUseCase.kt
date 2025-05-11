@@ -17,4 +17,7 @@ interface BookUseCase {
     fun getFavoriteBook(): Flow<List<Book>>
 
     fun setFavoriteBook(book: Book, state: Boolean)
+
+    suspend fun saveBook(book: Book)
+
 }

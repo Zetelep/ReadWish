@@ -53,7 +53,8 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFiction"
-                    style="@style/Widget.Material3.Chip.Filter.Elevated"                    android:layout_width="wrap_content"
+                    style="@style/Widget.Material3.Chip.Filter.Elevated"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chip_fiction"
                     app:chipBackgroundColor="@color/chip_background_color"
@@ -153,7 +154,7 @@
             app:layout_constraintBaseline_toBaselineOf="@id/topBookTitle"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/topLoadingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -162,6 +163,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topBookTitle"
             app:layout_constraintVertical_bias="0.004"
+            android:indeterminate="true"
             app:indicatorColor="@color/colorSecondary"
             app:trackColor="@color/colorPrimary"
             android:visibility="visible"/>
@@ -206,7 +208,7 @@
             app:layout_constraintBaseline_toBaselineOf="@id/latestBookTitle"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/latestLoadingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -215,6 +217,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/latestBookTitle"
             app:layout_constraintVertical_bias="0.004"
+            android:indeterminate="true"
             app:indicatorColor="@color/colorSecondary"
             app:trackColor="@color/colorPrimary"
             android:visibility="visible"/>
@@ -257,7 +260,7 @@
             app:layout_constraintBaseline_toBaselineOf="@id/oldestBookTitle"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/oldestLoadingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -266,6 +269,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/oldestBookTitle"
             app:layout_constraintVertical_bias="0.004"
+            android:indeterminate="true"
             app:indicatorColor="@color/colorSecondary"
             app:trackColor="@color/colorPrimary"
             android:visibility="visible"/>

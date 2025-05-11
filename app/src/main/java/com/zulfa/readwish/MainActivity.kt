@@ -1,6 +1,7 @@
 package com.zulfa.readwish
 
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -31,10 +32,30 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home,R.id.navigation_search, R.id.navigation_favorite, R.id.navigation_notifications
+                R.id.navigation_home,
+                R.id.navigation_search,
+                R.id.navigation_favorite,
+                R.id.navigation_notifications
+
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_home,
+                R.id.navigation_search,
+                R.id.navigation_favorite,
+                R.id.navigation_notifications -> {
+                    binding.navView.visibility = View.VISIBLE
+                }
+
+                else -> {
+                    binding.navView.visibility = View.GONE
+                    binding.topAppBar.visibility = View.GONE
+                }
+            }
+        }
     }
 }

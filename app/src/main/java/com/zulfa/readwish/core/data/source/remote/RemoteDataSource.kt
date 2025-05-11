@@ -45,7 +45,7 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun search(query: String): Flow<ApiResponse<List<BookItem>>> {
+        fun search(query: String): Flow<ApiResponse<List<BookItem>>> {
         return flow {
             try {
                 val response = apiService.search(query)
@@ -62,10 +62,10 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun searchBooksByTopic(query: String): Flow<ApiResponse<List<BookItem>>> {
+     fun searchBooksByTopic(query: String): Flow<ApiResponse<List<BookItem>>> {
         return flow {
             try {
-                val response = apiService.search(query)
+                val response = apiService.searchBooksByTopic(query)
                 val dataArray = response.results
                 if (dataArray.isNotEmpty()) {
                     emit(ApiResponse.Success(dataArray))

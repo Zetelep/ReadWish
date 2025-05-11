@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.zulfa.readwish.R
 import com.zulfa.readwish.core.data.Resource
 import com.zulfa.readwish.core.domain.model.Book
 import com.zulfa.readwish.core.ui.BookAdapter
@@ -48,6 +50,11 @@ class HomeFragment : Fragment() {
 
             val itemClickListener: (Book) -> Unit = { selectedData ->
                 Toast.makeText(context, "Details of $selectedData", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle().apply {
+                    putParcelable("EXTRA_DATA", selectedData)
+                }
+
+                findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
             }
 
             topBookAdapter.onItemClick = itemClickListener

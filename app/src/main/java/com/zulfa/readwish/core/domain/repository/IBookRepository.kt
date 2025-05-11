@@ -18,5 +18,8 @@ interface IBookRepository {
 
     fun setFavoriteBook(book: Book  , state: Boolean)
 
+    suspend fun saveBook(book: Book)
+
+
 
 }

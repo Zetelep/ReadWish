@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
 class BookRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -57,33 +58,38 @@ class BookRepository(
                 val bookList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertBook(bookList)
             }
-            override fun shouldFetch(data: List<Book>?): Boolean = data.isNullOrEmpty()
+            override fun shouldFetch(data: List<Book>?): Boolean = true
+                //data.isNullOrEmpty()
         }.asFlow()
 
 
-    override fun searchBooks(query: String): Flow<Resource<List<Book>>> = flow {
-        emit(Resource.Loading())
-        when (val response = remoteDataSource.search(query).first()) {
-            is ApiResponse.Success -> {
-                val data = DataMapper.mapResponsesToDomain(response.data)
-                emit(Resource.Success(data))
+    override fun searchBooks(query: String): Flow<Resource<List<Book>>> =
+        remoteDataSource.search(query).map { response ->
+            when (response) {
+                is ApiResponse.Success -> {
+                    val data = DataMapper.mapResponsesToDomain(response.data)
+                    Resource.Success(data)
+                }
+                is ApiResponse.Empty -> Resource.Success(emptyList())
+                is ApiResponse.Error -> Resource.Error(response.errorMessage)
             }
-            is ApiResponse.Empty -> emit(Resource.Success(emptyList()))
-            is ApiResponse.Error -> emit(Resource.Error(response.errorMessage))
-        }
-    }.flowOn(Dispatchers.IO)
+        }.onStart {
+            emit(Resource.Loading())
+        }.flowOn(Dispatchers.IO)
 
-    override fun searchBooksByTopic(query: String): Flow<Resource<List<Book>>> = flow {
-        emit(Resource.Loading())
-        when (val response = remoteDataSource.searchBooksByTopic(query).first()) {
-            is ApiResponse.Success -> {
-                val data = DataMapper.mapResponsesToDomain(response.data)
-                emit(Resource.Success(data))
+    override fun searchBooksByTopic(query: String): Flow<Resource<List<Book>>> =
+        remoteDataSource.searchBooksByTopic(query).map { response ->
+            when (response) {
+                is ApiResponse.Success -> {
+                    val data = DataMapper.mapResponsesToDomain(response.data)
+                    Resource.Success(data)
+                }
+                is ApiResponse.Empty -> Resource.Success(emptyList())
+                is ApiResponse.Error -> Resource.Error(response.errorMessage)
             }
-            is ApiResponse.Empty -> emit(Resource.Success(emptyList()))
-            is ApiResponse.Error -> emit(Resource.Error(response.errorMessage))
-        }
-    }.flowOn(Dispatchers.IO)
+        }.onStart {
+            emit(Resource.Loading())
+        }.flowOn(Dispatchers.IO)
 
     override fun getFavoriteBook(): Flow<List<Book>> {
         return localDataSource.getFavoriteBook().map {
@@ -96,5 +102,10 @@ class BookRepository(
         appExecutors.diskIO().execute{
             localDataSource.setFavoriteBook(bookEntity,state)
         }
+    }
+
+    override suspend fun saveBook(book: Book) {
+        val entity = DataMapper.mapDomainToEntity(book)
+        localDataSource.insertBook(listOf(entity))
     }
 }

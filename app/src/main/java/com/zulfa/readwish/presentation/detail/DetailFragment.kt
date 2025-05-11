@@ -1,60 +1,98 @@
 package com.zulfa.readwish.presentation.detail
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.WindowCompat
+import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import com.zulfa.readwish.R
+import com.zulfa.readwish.core.domain.model.Book
+import com.zulfa.readwish.databinding.FragmentDetailBinding
+import com.zulfa.readwish.databinding.FragmentHomeBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentDetailBinding? =null
+    private val binding get() = _binding!!
+    private val detailViewModel: DetailViewModel by viewModel()
+
+    private var book: Book? = null
+
+    companion object {
+        var EXTRA_DATA = "extra_data"
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+    ): View {
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (activity != null) {
+
+            val book = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getParcelable("EXTRA_DATA", Book::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                arguments?.getParcelable<Book>("EXTRA_DATA")
             }
+
+            book?.let { selectedBook ->
+                bindBookData(selectedBook)
+                detailViewModel.saveBookToLocal(selectedBook)
+            }
+
+            binding.topAppBar.setNavigationOnClickListener {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        }
+
     }
+
+    private fun bindBookData(book: Book) {
+        binding.tvBookTitle.text = book.title
+        binding.tvAuthorName.text = book.authors.toString()
+        binding.textView2.text = getString(R.string.title_summary)
+        binding.favoriteButton.isChecked = book.isFavorite
+
+        // Set book cover if using URL (use Glide or Coil)
+        Glide.with(this)
+            .load(book.coverBook)
+            .placeholder(R.drawable.sample_cover)
+            .into(binding.ivBookCover)
+
+        // Populate genre chip group
+        binding.genreChipGroup.removeAllViews()
+        book.subject.forEach { genre ->
+            val chip = Chip(requireContext())
+            chip.text = genre
+            chip.isClickable = false
+            chip.isCheckable = false
+            binding.genreChipGroup.addView(chip)
+        }
+
+        // Favorite toggle
+        binding.favoriteButton.setOnCheckedChangeListener { _, isChecked ->
+            detailViewModel.setFavoriteBook(book, isChecked)
+        }
+
+        // Action button
+        binding.actionButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Opening '${book.title}'...", Toast.LENGTH_SHORT).show()
+            // handle open book logic
+        }
+    }
+
 }

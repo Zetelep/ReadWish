@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.zulfa.readwish.presentation.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_search"
@@ -28,4 +32,13 @@
         android:name="com.zulfa.readwish.presentation.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.zulfa.readwish.presentation.detail.DetailFragment"
+        android:label="Book Detail"
+        tools:layout="@layout/fragment_detail" >
+    </fragment>
+
+
 </navigation>

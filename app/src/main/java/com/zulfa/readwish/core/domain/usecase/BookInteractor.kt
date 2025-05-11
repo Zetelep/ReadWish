@@ -18,4 +18,8 @@ class BookInteractor(private val bookRepository: IBookRepository): BookUseCase {
 
     override fun setFavoriteBook(book: Book, state: Boolean) = bookRepository.setFavoriteBook(book, state)
 
+    override suspend fun saveBook(book: Book) {
+        bookRepository.saveBook(book)
+    }
+
 }

@@ -125,6 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="18sp"
+                android:layout_marginBottom="80dp"
                 android:justificationMode="inter_word"
                 android:lineSpacingExtra="4dp"
                 android:paddingBottom="16sp"
@@ -141,9 +142,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/colorSecondary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -152,15 +153,13 @@
             android:id="@+id/actionButton"
             style="@style/Widget.Material3.Button.Icon"
             android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/rounded_button"
+            android:layout_height="wrap_content"
             android:text="@string/btn_read_book"
             android:textSize="21sp"
             app:icon="@drawable/menu_book_48px"
             app:iconPadding="-40dp"
             app:iconSize="48dp"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />

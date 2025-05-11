@@ -5,56 +5,108 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
+import androidx.recyclerview.widget.GridLayoutManager
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.zulfa.readwish.R
+import com.zulfa.readwish.core.data.Resource
+import com.zulfa.readwish.core.domain.model.Book
+import com.zulfa.readwish.core.ui.BookAdapter
+import com.zulfa.readwish.databinding.FragmentSearchBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: SearchViewModel by viewModel()
+    private val bookAdapter = BookAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupRecyclerView()
+        setupSearchListener()
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvFavoriteBooks.apply {
+            adapter = bookAdapter
+            layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+    }
+
+    private fun setupSearchListener() {
+        val searchEditText = binding.searchField
+
+        // Listener for "Enter" or "Search" key press
+        searchEditText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
+                val query = v.text.toString().trim()
+                bookAdapter.submitList(emptyList())
+                if (query.isNotEmpty()) {
+                    when (binding.toggleButton.checkedButtonId) {
+                        R.id.bt_by_author_title -> observeSearchBooks(query)
+                        R.id.bt_by_topic -> observeSearchBooksByTopic(query)
+                    }
+                }
+                // Return true to indicate that the event was handled
+                return@setOnEditorActionListener true
+            }
+            false
+        }
+        binding.toggleButton.addOnButtonCheckedListener { _, _, isChecked ->
+            if (isChecked) {
+                val query = searchEditText.text.toString().trim()
+                bookAdapter.submitList(emptyList())
+                if (query.isNotEmpty()) {
+                    when (binding.toggleButton.checkedButtonId) {
+                        R.id.bt_by_author_title -> observeSearchBooks(query)
+                        R.id.bt_by_topic -> observeSearchBooksByTopic(query)
+                    }
                 }
             }
+        }
+    }
+
+    private fun observeSearchBooks(query: String) {
+        viewModel.searchBooks(query).observe(viewLifecycleOwner) { result ->
+            handleSearchResult(result)
+        }
+    }
+
+    private fun observeSearchBooksByTopic(query: String) {
+        viewModel.searchBooksByTopic(query).observe(viewLifecycleOwner) { result ->
+            handleSearchResult(result)
+        }
+    }
+
+    private fun handleSearchResult(result: Resource<List<Book>>) {
+        when (result) {
+            is Resource.Loading -> {
+                binding.loadingBar.visibility = View.VISIBLE
+            }
+            is Resource.Success -> {
+                binding.loadingBar.visibility = View.GONE
+                bookAdapter.submitList(result.data)
+            }
+            is Resource.Error -> {
+                binding.loadingBar.visibility = View.GONE
+                Toast.makeText(requireContext(), result.message ?: "An error occurred", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
