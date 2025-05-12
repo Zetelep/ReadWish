@@ -5,56 +5,80 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.zulfa.readwish.R
+import com.zulfa.readwish.core.data.Resource
+import com.zulfa.readwish.core.ui.BookAdapter
+import com.zulfa.readwish.databinding.FragmentDetailBinding
+import com.zulfa.readwish.databinding.FragmentListMoreBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ListMoreFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ListMoreFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    private var _binding: FragmentListMoreBinding? =null
+    private val binding get() = _binding!!
+    private val listMoreViewModel: ListMoreViewModel by viewModel {
+        parametersOf(
+            arguments?.getString("topic") ?: "all",
+            arguments?.getString("sort") ?: ""
+        )
+    }
+
+    private val bookAdapter = BookAdapter()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentListMoreBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (activity != null) {
+            bookAdapter.onItemClick = {selectedData ->
+                Toast.makeText(context, "Details of $selectedData", Toast.LENGTH_SHORT).show()
+                val bundle = Bundle().apply {
+                    putParcelable("EXTRA_DATA", selectedData)
+                }
+                findNavController().navigate(R.id.action_listMoreFragment_to_detailFragment, bundle)
+
+            }
+
+            binding.topAppBar.setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+
+            listMoreViewModel.books.observe(viewLifecycleOwner){book ->
+                if(book != null){
+                    when(book){
+                        is Resource.Error -> {
+                            binding.loadingBar.visibility = View.GONE
+                            Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        is Resource.Loading -> binding.loadingBar.visibility = View.VISIBLE
+                        is Resource.Success ->{
+                            binding.loadingBar.visibility = View.GONE
+                            bookAdapter.submitList(book.data)
+                        }
+                    }
+                }
+            }
+            with(binding.rvMoreBooks) {
+                layoutManager = GridLayoutManager(context,2)
+                setHasFixedSize(true)
+                adapter = bookAdapter
+            }
+
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_more, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListMoreFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ListMoreFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

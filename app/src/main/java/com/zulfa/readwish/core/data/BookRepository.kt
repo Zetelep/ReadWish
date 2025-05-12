@@ -10,8 +10,6 @@ import com.zulfa.readwish.core.utils.AppExecutors
 import com.zulfa.readwish.core.utils.DataMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
@@ -59,7 +57,7 @@ class BookRepository(
                 localDataSource.insertBook(bookList)
             }
             override fun shouldFetch(data: List<Book>?): Boolean = true
-                //data.isNullOrEmpty()
+//                data.isNullOrEmpty()
         }.asFlow()
 
 

@@ -61,6 +61,36 @@ class HomeFragment : Fragment() {
             latestBookAdapter.onItemClick = itemClickListener
             oldestBookAdapter.onItemClick = itemClickListener
 
+            binding.moreTopBooks.setOnClickListener {
+                val topic = homeViewModel.selectedTopic.value
+                val sort =""
+                val bundle = Bundle().apply {
+                    putString("topic", topic)
+                    putString("sort", sort)
+                }
+                findNavController().navigate(R.id.action_homeFragment_to_listMoreFragment, bundle)
+            }
+
+            binding.moreLatestBooks.setOnClickListener {
+                val topic = homeViewModel.selectedTopic.value
+                val sort ="ascending"
+                val bundle = Bundle().apply {
+                    putString("topic", topic)
+                    putString("sort", sort)
+                }
+                findNavController().navigate(R.id.action_homeFragment_to_listMoreFragment, bundle)
+            }
+
+            binding.moreOldestBooks.setOnClickListener {
+                val topic = homeViewModel.selectedTopic.value
+                val sort = "descending"
+                val bundle = Bundle().apply {
+                    putString("topic", topic)
+                    putString("sort", sort)
+                }
+                findNavController().navigate(R.id.action_homeFragment_to_listMoreFragment, bundle)
+            }
+
             setupChipClickListeners()
         }
     }

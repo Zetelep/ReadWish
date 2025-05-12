@@ -29,7 +29,7 @@ interface BookDao {
     @Query("SELECT * FROM book WHERE isFavorite = 1")
     fun getFavoriteBook(): Flow<List<BookEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertBook(book:List<BookEntity>)
 
     @Update

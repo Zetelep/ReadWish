@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listMoreFragment"
+            app:destination="@id/listMoreFragment" />
     </fragment>
 
     <fragment
@@ -25,7 +28,11 @@
         android:id="@+id/navigation_favorite"
         android:name="com.zulfa.readwish.presentation.favorite.FavoriteFragment"
         android:label="@string/title_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -38,6 +45,36 @@
         android:name="com.zulfa.readwish.presentation.detail.DetailFragment"
         android:label="Book Detail"
         tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_readFragment"
+            app:destination="@id/readFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/listMoreFragment"
+        android:name="com.zulfa.readwish.presentation.list.ListMoreFragment"
+        android:label="List Book"
+        tools:layout="@layout/fragment_list_more">
+        <argument
+            android:name="topic"
+            app:argType="string" />
+        <argument
+            android:name="sort"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_listMoreFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/readFragment"
+        android:name="com.zulfa.readwish.presentation.read.ReadFragment"
+        android:label="Read Page"
+        tools:layout="@layout/fragment_read">
+        <argument
+            android:name="sort"
+            app:argType="string" />
+
     </fragment>
 
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import com.zulfa.readwish.R
@@ -48,7 +49,7 @@ class DetailFragment : Fragment() {
             }
 
             binding.topAppBar.setNavigationOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
+                findNavController().navigateUp()
             }
         }
 
@@ -92,8 +93,10 @@ class DetailFragment : Fragment() {
         // Action button
         binding.actionButton.setOnClickListener {
             Toast.makeText(requireContext(), "Opening '${book.title}'...", Toast.LENGTH_SHORT).show()
-            // handle open book logic
-        }
+            val bundle = Bundle().apply {
+                putString("link", book.htmlBook)
+            }
+            findNavController().navigate(R.id.action_detailFragment_to_readFragment, bundle)        }
     }
 
 }
