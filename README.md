@@ -1,14 +1,15 @@
 # ReadWish - Android App
 
-<img src="Logo" align="left"
-width="200" hspace="10" vspace="10">
-
+<img 
+  src="https://github.com/user-attachments/assets/edab74c1-5897-424d-9214-537511698f6b" 
+  align="left" 
+  width="100" 
+  hspace="10" 
+  vspace="10" 
+/>
 ReadWish is a Read Free Book app.  
 This App using [Project Gutenberg](https://www.gutenberg.org/) API as the book source.  
-
-
-
-
+<br><br>
 ## About
 
 This app is a lightweight and intuitive application that connects to the Project Gutenberg API to provide access to thousands of free eBooks from the public domain. 
