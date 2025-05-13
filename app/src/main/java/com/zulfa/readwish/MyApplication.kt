@@ -1,6 +1,7 @@
 package com.zulfa.readwish
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.zulfa.readwish.core.di.databaseModule
 import com.zulfa.readwish.core.di.networkModule
 import com.zulfa.readwish.core.di.repositoryModule
@@ -26,5 +27,7 @@ class MyApplication : Application() {
                 )
             )
         }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
     }
 }

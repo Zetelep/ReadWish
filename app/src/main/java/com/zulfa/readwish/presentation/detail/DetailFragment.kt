@@ -95,6 +95,7 @@ class DetailFragment : Fragment() {
             Toast.makeText(requireContext(), "Opening '${book.title}'...", Toast.LENGTH_SHORT).show()
             val bundle = Bundle().apply {
                 putString("link", book.htmlBook)
+                putString("title",book.title)
             }
             findNavController().navigate(R.id.action_detailFragment_to_readFragment, bundle)        }
     }
