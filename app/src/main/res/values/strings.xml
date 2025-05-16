@@ -31,4 +31,5 @@
     <string name="hint_search">Search</string>
     <string name="btn_filter_by_author_amp_title"><![CDATA[By Author & Title]]></string>
     <string name="btn_filter_by_topic">By Topic</string>
+    <string name="title_settings">Settings</string>
 </resources>

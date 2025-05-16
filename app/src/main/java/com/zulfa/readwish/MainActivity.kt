@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home,
                 R.id.navigation_search,
                 R.id.navigation_favorite,
-                R.id.navigation_notifications
+                R.id.navigation_settings
 
             )
         )
@@ -47,10 +46,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home,
                 R.id.navigation_search,
                 R.id.navigation_favorite,
-                R.id.navigation_notifications -> {
+                R.id.navigation_settings -> {
                     binding.navView.visibility = View.VISIBLE
                 }
-
                 else -> {
                     binding.navView.visibility = View.GONE
                     binding.topAppBar.visibility = View.GONE
